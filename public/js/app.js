@@ -70002,14 +70002,16 @@ var Example = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__material_ui_icons_ExpandMore___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_31__material_ui_icons_ExpandMore__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__material_ui_icons_StarBorder__ = __webpack_require__(300);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__material_ui_icons_StarBorder___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_32__material_ui_icons_StarBorder__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__material_ui_core_Popper__ = __webpack_require__(309);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__material_ui_core_Popper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_33__material_ui_core_Popper__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__material_ui_core_Fade__ = __webpack_require__(313);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__material_ui_core_Fade___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_34__material_ui_core_Fade__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__material_ui_core_Paper__ = __webpack_require__(234);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__material_ui_core_Paper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_35__material_ui_core_Paper__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__material_ui_core_Collapse__ = __webpack_require__(301);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__material_ui_core_Collapse___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_36__material_ui_core_Collapse__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__material_ui_icons_KeyboardArrowRight__ = __webpack_require__(315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__material_ui_icons_KeyboardArrowRight___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_33__material_ui_icons_KeyboardArrowRight__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__material_ui_core_Popper__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__material_ui_core_Popper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_34__material_ui_core_Popper__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__material_ui_core_Fade__ = __webpack_require__(313);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__material_ui_core_Fade___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_35__material_ui_core_Fade__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__material_ui_core_Paper__ = __webpack_require__(234);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__material_ui_core_Paper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_36__material_ui_core_Paper__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__material_ui_core_Collapse__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__material_ui_core_Collapse___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_37__material_ui_core_Collapse__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -70019,6 +70021,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -70148,7 +70151,9 @@ var Menu = function (_React$Component) {
 
     _this.state = {
       open: false,
-      anchorEl: null
+      anchorEl: null,
+      anchorEl__popper: null,
+      open_popper: false
     };
     return _this;
   }
@@ -70175,13 +70180,12 @@ var Menu = function (_React$Component) {
     key: 'handleClickMessage',
     value: function handleClickMessage(event) {
       var currentTarget = event.currentTarget;
-
-      console.log(event.currentTarget);
+      // console.log(event.currentTarget);
 
       this.setState(function (state) {
         return {
-          anchorEl: currentTarget,
-          open: !state.open
+          anchorEl__popper: currentTarget,
+          open_popper: !state.open_popper
         };
       });
     }
@@ -70193,10 +70197,10 @@ var Menu = function (_React$Component) {
       // var { anchorEl } = this.state;
       var classes = this.props.classes;
       var _state = this.state,
-          anchorEl = _state.anchorEl,
-          open = _state.open;
+          anchorEl__popper = _state.anchorEl__popper,
+          open_popper = _state.open_popper;
 
-      var id = open ? 'simple-popper' : null;
+      var id = open_popper ? 'simple-popper' : null;
       var contextTypes = {
         router: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.object
       };
@@ -70238,15 +70242,15 @@ var Menu = function (_React$Component) {
                   'Messages'
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  __WEBPACK_IMPORTED_MODULE_33__material_ui_core_Popper___default.a,
-                  { id: id, open: open, anchorEl: anchorEl, transition: true },
+                  __WEBPACK_IMPORTED_MODULE_34__material_ui_core_Popper___default.a,
+                  { id: id, open: open_popper, anchorEl: anchorEl__popper, transition: true },
                   function (_ref) {
                     var TransitionProps = _ref.TransitionProps;
                     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                      __WEBPACK_IMPORTED_MODULE_34__material_ui_core_Fade___default.a,
+                      __WEBPACK_IMPORTED_MODULE_35__material_ui_core_Fade___default.a,
                       _extends({}, TransitionProps, { timeout: 350 }),
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        __WEBPACK_IMPORTED_MODULE_35__material_ui_core_Paper___default.a,
+                        __WEBPACK_IMPORTED_MODULE_36__material_ui_core_Paper___default.a,
                         null,
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                           __WEBPACK_IMPORTED_MODULE_6__material_ui_core_Typography___default.a,
@@ -70390,16 +70394,19 @@ var Menu = function (_React$Component) {
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     __WEBPACK_IMPORTED_MODULE_10__material_ui_core_MenuItem___default.a,
                     { onClick: this.handleClose },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_33__material_ui_icons_KeyboardArrowRight___default.a, null),
                     'Profile '
                   ),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     __WEBPACK_IMPORTED_MODULE_10__material_ui_core_MenuItem___default.a,
                     { onClick: this.handleClose },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_33__material_ui_icons_KeyboardArrowRight___default.a, null),
                     'My account'
                   ),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     __WEBPACK_IMPORTED_MODULE_10__material_ui_core_MenuItem___default.a,
                     { onClick: this.handleClose },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_33__material_ui_icons_KeyboardArrowRight___default.a, null),
                     'Logout'
                   )
                 ) : null
@@ -82366,6 +82373,33 @@ Fade.defaultProps = {
 };
 
 var _default = (0, _withTheme.default)()(Fade);
+
+exports.default = _default;
+
+/***/ }),
+/* 315 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(6);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(1));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(9));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement(_react.default.Fragment, null, _react.default.createElement("path", {
+  d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
+}), _react.default.createElement("path", {
+  fill: "none",
+  d: "M0 0h24v24H0V0z"
+})), 'KeyboardArrowRight');
 
 exports.default = _default;
 

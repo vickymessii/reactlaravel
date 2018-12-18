@@ -31,6 +31,7 @@ import WebAsset from '@material-ui/icons/WebAsset';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Popper from '@material-ui/core/Popper';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
@@ -120,6 +121,8 @@ class Menu extends React.Component {
       this.state = {
             open: false,
             anchorEl: null,
+            anchorEl__popper:null,
+            open_popper:false,
           };
     }
     handleClick (value) {
@@ -136,18 +139,18 @@ class Menu extends React.Component {
       };
       handleClickMessage (event) {
         const { currentTarget } = event;
-        console.log(event.currentTarget);
+       // console.log(event.currentTarget);
 
         this.setState(state => ({
-          anchorEl: currentTarget,
-          open: !state.open,
+            anchorEl__popper: currentTarget,
+            open_popper: !state.open_popper,
         }));
       };
   render(){
     // var { anchorEl } = this.state;
        const { classes } = this.props;
-       const { anchorEl, open } = this.state;
-       const id = open ? 'simple-popper' : null;
+       const { anchorEl__popper, open_popper } = this.state;
+       const id = open_popper ? 'simple-popper' : null;
     const contextTypes = {
         router: PropTypes.object
         }
@@ -168,7 +171,7 @@ class Menu extends React.Component {
 			            </Badge>
 			          </IconButton>
 			          <p  className={classes.p}>Messages</p>
-                      <Popper id={id} open={open} anchorEl={anchorEl} transition>
+                      <Popper id={id} open={open_popper} anchorEl={anchorEl__popper} transition>
                         {({ TransitionProps }) => (
                             <Fade {...TransitionProps} timeout={350}>
                             <Paper>
@@ -244,10 +247,10 @@ class Menu extends React.Component {
 				          <ListItemText classes={{ primary: classes.primary }} inset primary="Dashboard 2" />
                         </MenuItem>
                         </Link>
-                        {this.state.open===true ?  <div>
-                        <MenuItem onClick={this.handleClose}>Profile </MenuItem>
-                        <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                        <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                        {this.state.open===true ?  <div >
+                        <MenuItem onClick={this.handleClose}><KeyboardArrowRight/>Profile </MenuItem>
+                        <MenuItem onClick={this.handleClose}><KeyboardArrowRight/>My account</MenuItem>
+                        <MenuItem onClick={this.handleClose}><KeyboardArrowRight/>Logout</MenuItem>
                         </div>: null }
 				      </MenuList>
 		           </Grid>
