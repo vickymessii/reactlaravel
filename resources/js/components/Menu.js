@@ -42,6 +42,9 @@ import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import Collapse from '@material-ui/core/Collapse';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ImageIcon from '@material-ui/icons/Image';
+import WorkIcon from '@material-ui/icons/Work';
+import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 
 const styles = theme => ({
     typography: {
@@ -90,44 +93,6 @@ const styles = theme => ({
   },
   });
 
-// const styles = {
-//   root: {
-//     flexGrow: 1,
-//   },
-//   grow: {
-//     flexGrow: 1,
-//   },
-//   p:{
-//   	color:'white'
-//   },
-//   menuButton: {
-//     marginLeft: -12,
-//     marginRight: 20,
-//   },
-//    menuItem: {
-//     '&:focus': {
-//       backgroundColor:'primary',
-//       '& $primary, & $icon': {
-//         color: 'primary',
-//       },
-//     },
-//   },
-//   primary: {},
-//   icon: {},
-//    avatar: {
-//     margin: 10,
-//   },
-//   bigAvatar: {
-//     margin: 10,
-//     width: 60,
-//     height: 60,
-//   },
-//   profiletext:{
-//   	marginTop: 16
-//   },
-
-// };
-
 class Menu extends React.Component {
     constructor(state) {
         super(state);
@@ -136,6 +101,8 @@ class Menu extends React.Component {
             anchorEl: null,
             anchorEl__popper:null,
             open_popper:false,
+            anchorEl_notification:null,
+            open_notification:false,
           };
     }
     handleClick (value) {
@@ -152,21 +119,27 @@ class Menu extends React.Component {
       };
       handleClickMessage (event) {
         const { currentTarget } = event;
-       // console.log(event.currentTarget);
-
         this.setState(state => ({
             anchorEl__popper: currentTarget,
             open_popper: !state.open_popper,
         }));
       };
+      handleClickNotification(event) {
+        const { currentTarget } = event;
+        this.setState(state => ({
+            anchorEl_notification: currentTarget,
+            open_notification: !state.open_notification,
+        }));
+      };
   render(){
-    // var { anchorEl } = this.state;
        const { classes } = this.props;
        const { anchorEl__popper, open_popper } = this.state;
+       const { anchorEl_notification, open_notification } = this.state;
        const id = open_popper ? 'simple-popper' : null;
-    const contextTypes = {
-        router: PropTypes.object
-        }
+       const notification_id = open_notification ? 'simple-popper' : null;
+    //    const contextTypes = {
+    //     router: PropTypes.object
+    //     }
         const msgs = (<List className={classes.list}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
@@ -181,8 +154,7 @@ class Menu extends React.Component {
                     </Typography>
                     {" — I'll be in your neighborhood doing errands this…"}
                   </React.Fragment>
-                }
-              />
+                }/>
             </ListItem>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
@@ -217,6 +189,28 @@ class Menu extends React.Component {
               />
             </ListItem>
           </List>);
+          const notifications = (
+            <List className={classes.root}>
+            <ListItem>
+              <Avatar>
+                <ImageIcon />
+              </Avatar>
+              <ListItemText primary="Notification from John deo" secondary="Jan 9, 2018" />
+            </ListItem>
+            <ListItem>
+              <Avatar>
+                <WorkIcon />
+              </Avatar>
+              <ListItemText primary="Notification from Stacy John" secondary="Jan 7, 2018" />
+            </ListItem>
+            <ListItem>
+              <Avatar>
+                <BeachAccessIcon />
+              </Avatar>
+              <ListItemText primary="Notification from Anonymous" secondary="July 20, 2018" />
+            </ListItem>
+          </List>
+          );
     return (
       <div className="container-fluid">
        <div className={classes.root}>
@@ -225,7 +219,7 @@ class Menu extends React.Component {
 		          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
 		          </IconButton>
 		          <Typography variant="h6" color="inherit" className={classes.grow}>
-		            React | Laravel | Admin
+                  {' React | Laravel | Admin'}
 		          </Typography>
 		         <MenuItem aria-describedby={id} variant="contained" onClick={(e) => this.handleClickMessage(e)}>
 			          <IconButton color="default">
@@ -233,7 +227,7 @@ class Menu extends React.Component {
 			              <MailIcon />
 			            </Badge>
 			          </IconButton>
-			          <p  className={classes.p}>Messages</p>
+			          <p className={classes.p}>Messages</p>
                       <Popper id={id} open={open_popper} anchorEl={anchorEl__popper} transition>
                         {({ TransitionProps }) => (
                             <Fade {...TransitionProps} timeout={350}>
@@ -244,13 +238,22 @@ class Menu extends React.Component {
                         )}
                         </Popper>
 			        </MenuItem>
-			        <MenuItem>
+			        <MenuItem aria-describedby={notification_id} variant="contained" onClick={(e) => this.handleClickNotification(e)}>
 			          <IconButton color="default">
 			            <Badge badgeContent={11} color="secondary" className={classes.p}>
 			              <NotificationsIcon />
 			            </Badge>
 			          </IconButton>
 			          <p  className={classes.p}>Notifications</p>
+                      <Popper id={notification_id} open={open_notification} anchorEl={anchorEl_notification} transition>
+                        {({ TransitionProps }) => (
+                            <Fade {...TransitionProps} timeout={350}>
+                            <Paper>
+                               {notifications}
+                            </Paper>
+                            </Fade>
+                        )}
+                        </Popper>
 			        </MenuItem>
 			        <MenuItem>
 			          <IconButton color="inherit" className={classes.p}>
@@ -316,6 +319,14 @@ class Menu extends React.Component {
                         <MenuItem onClick={this.handleClose}><ArrowRight/>My account</MenuItem>
                         <MenuItem onClick={this.handleClose}><ArrowRight/>Logout</MenuItem>
                         </div>: null }
+                        <Link to={'/reactlaravel/example'}>
+				        <MenuItem className={classes.menuItem}>
+				          <ListItemIcon className={classes.icon}>
+				             <WebAsset />
+				          </ListItemIcon>
+				          <ListItemText classes={{ primary: classes.primary }} inset primary="Dashboard 2" />
+				        </MenuItem>
+				        </Link>
 				      </MenuList>
 		           </Grid>
 
