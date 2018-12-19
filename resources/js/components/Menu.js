@@ -32,10 +32,16 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import ArrowRight from '@material-ui/icons/ArrowRight';
+
+
 import Popper from '@material-ui/core/Popper';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import Collapse from '@material-ui/core/Collapse';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 
 const styles = theme => ({
     typography: {
@@ -74,6 +80,13 @@ const styles = theme => ({
   },
   profiletext:{
   	marginTop: 16
+  },
+  inline: {
+    display: 'inline',
+  },
+  list:{
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
   },
   });
 
@@ -154,6 +167,56 @@ class Menu extends React.Component {
     const contextTypes = {
         router: PropTypes.object
         }
+        const msgs = (<List className={classes.list}>
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar alt="Remy Sharp" src="public/static/1.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                primary="Brunch this weekend?"
+                secondary={
+                  <React.Fragment>
+                    <Typography component="span" className={classes.inline} color="textPrimary">
+                      Ali Connors
+                    </Typography>
+                    {" — I'll be in your neighborhood doing errands this…"}
+                  </React.Fragment>
+                }
+              />
+            </ListItem>
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar alt="Remy Sharp" src="public/static/2.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                primary="Summer BBQ"
+                secondary={
+                  <React.Fragment>
+                    <Typography component="span" className={classes.inline} color="textPrimary">
+                      to Scott, Alex, Jennifer
+                    </Typography>
+                    {" — Wish I could come, but I'm out of town this…"}
+                  </React.Fragment>
+                }
+              />
+            </ListItem>
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar alt="Remy Sharp" src="public/static/3.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                primary="Oui Oui"
+                secondary={
+                  <React.Fragment>
+                    <Typography component="span" className={classes.inline} color="textPrimary">
+                      Sandra Adams
+                    </Typography>
+                    {' — Do you have Paris recommendations? Have you ever…'}
+                  </React.Fragment>
+                }
+              />
+            </ListItem>
+          </List>);
     return (
       <div className="container-fluid">
        <div className={classes.root}>
@@ -166,7 +229,7 @@ class Menu extends React.Component {
 		          </Typography>
 		         <MenuItem aria-describedby={id} variant="contained" onClick={(e) => this.handleClickMessage(e)}>
 			          <IconButton color="default">
-			            <Badge badgeContent={4} color="secondary" className={classes.p}>
+			            <Badge badgeContent={3} color="secondary" className={classes.p}>
 			              <MailIcon />
 			            </Badge>
 			          </IconButton>
@@ -175,7 +238,7 @@ class Menu extends React.Component {
                         {({ TransitionProps }) => (
                             <Fade {...TransitionProps} timeout={350}>
                             <Paper>
-                                <Typography className={classes.typography}>The content of the Popper.</Typography>
+                               {msgs}
                             </Paper>
                             </Fade>
                         )}
@@ -216,9 +279,9 @@ class Menu extends React.Component {
 			           <IconButton color="inherit">
 			            <Settings />
 			          </IconButton>
-			           <IconButton color="inherit">
+			           {/* <IconButton color="inherit">
 			            <InboxIcon />
-			          </IconButton>
+			          </IconButton> */}
 			           <IconButton color="inherit">
 			            <ExitToApp />
 			          </IconButton>
@@ -243,14 +306,15 @@ class Menu extends React.Component {
 				        </Link>
                         <Link to={'/reactlaravel/'}>
                         <MenuItem className={classes.menuItem} onClick={() => this.handleClick(false)}>
-                            <InboxIcon />
-				          <ListItemText classes={{ primary: classes.primary }} inset primary="Dashboard 2" />
+                            <ShoppingCart />
+				          <ListItemText classes={{ primary: classes.primary }} inset primary="E-Commerce" />
+                          <KeyboardArrowDown/>
                         </MenuItem>
                         </Link>
                         {this.state.open===true ?  <div >
-                        <MenuItem onClick={this.handleClose}><KeyboardArrowRight/>Profile </MenuItem>
-                        <MenuItem onClick={this.handleClose}><KeyboardArrowRight/>My account</MenuItem>
-                        <MenuItem onClick={this.handleClose}><KeyboardArrowRight/>Logout</MenuItem>
+                        <MenuItem onClick={this.handleClose}><ArrowRight/>Profile </MenuItem>
+                        <MenuItem onClick={this.handleClose}><ArrowRight/>My account</MenuItem>
+                        <MenuItem onClick={this.handleClose}><ArrowRight/>Logout</MenuItem>
                         </div>: null }
 				      </MenuList>
 		           </Grid>
