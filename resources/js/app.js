@@ -18,6 +18,7 @@ import { render } from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
 import Example from './components/Example';
 import Menu from './components/Menu';
+///import '@devexpress/dx-react-chart-bootstrap4/dist/dx-react-chart-bootstrap4.css';
 
 render(<Router history={browserHistory}>
       <Route path="/reactlaravel" component={Menu} >

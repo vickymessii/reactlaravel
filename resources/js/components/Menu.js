@@ -35,8 +35,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import ArrowRight from '@material-ui/icons/ArrowRight';
-
-
+import { Chart, ArgumentAxis, ValueAxis, LineSeries } from "@devexpress/dx-react-chart-material-ui";
 import Popper from '@material-ui/core/Popper';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
@@ -103,6 +102,9 @@ class Menu extends React.Component {
             open_popper:false,
             anchorEl_notification:null,
             open_notification:false,
+            open_profile:false,
+            anchorEl_profile:null,
+
           };
     }
     handleClick (value) {
@@ -131,15 +133,25 @@ class Menu extends React.Component {
             open_notification: !state.open_notification,
         }));
       };
+      handleClickProfile(event) {
+        const { currentTarget } = event;
+        this.setState(state => ({
+            anchorEl_profile: currentTarget,
+            open_profile: !state.open_profile,
+        }));
+      };
   render(){
        const { classes } = this.props;
        const { anchorEl__popper, open_popper } = this.state;
        const { anchorEl_notification, open_notification } = this.state;
+       const { anchorEl_profile, open_profile } = this.state;
        const id = open_popper ? 'simple-popper' : null;
        const notification_id = open_notification ? 'simple-popper' : null;
+       const profile_id = open_profile ? 'simple-popper' : null;
     //    const contextTypes = {
     //     router: PropTypes.object
     //     }
+
         const msgs = (<List className={classes.list}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
@@ -211,6 +223,13 @@ class Menu extends React.Component {
             </ListItem>
           </List>
           );
+          const profile_items = (
+         <div>
+                <MenuItem onClick={this.handleClose}><ArrowRight/>Profile </MenuItem>
+                 <MenuItem onClick={this.handleClose}><ArrowRight/>My account</MenuItem>
+                <MenuItem onClick={this.handleClose}><ArrowRight/>Logout</MenuItem>
+         </div>
+           );
     return (
       <div className="container-fluid">
        <div className={classes.root}>
@@ -255,11 +274,20 @@ class Menu extends React.Component {
                         )}
                         </Popper>
 			        </MenuItem>
-			        <MenuItem>
+			        <MenuItem aria-describedby={profile_id} variant="contained" onClick={(e) => this.handleClickProfile(e)}>
 			          <IconButton color="inherit" className={classes.p}>
 			            <AccountCircle />
 			          </IconButton>
 			          <p className={classes.p} >Profile</p>
+                      <Popper id={profile_id} open={open_profile} anchorEl={anchorEl_profile} transition>
+                        {({ TransitionProps }) => (
+                            <Fade {...TransitionProps} timeout={350}>
+                            <Paper>
+                               {profile_items}
+                            </Paper>
+                            </Fade>
+                        )}
+                        </Popper>
 			        </MenuItem>
 		        </Toolbar>
 		      </AppBar>
